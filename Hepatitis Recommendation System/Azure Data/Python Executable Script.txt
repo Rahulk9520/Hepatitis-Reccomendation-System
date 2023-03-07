@@ -1,0 +1,16 @@
+# The script MUST contain a function named azureml_main
+# which is the entry point for this module.
+
+# imports up here can be used to 
+import pandas as pd
+import sys
+import pickle
+# The entry point function can contain up to two input arguments:
+#   Param<dataframe1>: a pandas.DataFrame
+#   Param<dataframe2>: a pandas.DataFrame
+def azureml_main(dataframe1 = None, dataframe2 = None):
+    sys.path.insert(0,".\Script Bundle")
+    model=pickle.load(open(".\Script Bundle\Diamodel.pkl",'rb'))
+    pred=model.predict(dataframe1)
+    # Return value must be of a sequence of pandas.DataFrame
+    return pd.DataFrame([pred[0]]),
